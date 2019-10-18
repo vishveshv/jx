@@ -5,7 +5,6 @@ package versionstreamrepo_test
 import (
 	"fmt"
 	"io/ioutil"
-	"os"
 	"testing"
 
 	"github.com/jenkins-x/jx/pkg/gits"
@@ -72,10 +71,6 @@ func initializeTempGitRepo(gitter gits.Gitter) (string, error) {
 func TestCloneJXVersionsRepoWithTeamSettings(t *testing.T) {
 	gitter := gits.NewGitCLI()
 	gitDir, err := initializeTempGitRepo(gitter)
-	defer func() {
-		err := os.RemoveAll(gitDir)
-		assert.NoError(t, err)
-	}()
 	assert.NoError(t, err)
 	settings := &v1.TeamSettings{
 		VersionStreamURL: gitDir,
@@ -101,10 +96,6 @@ func TestCloneJXVersionsRepoWithTeamSettings(t *testing.T) {
 func TestCloneJXVersionsRepoWithATag(t *testing.T) {
 	gitter := gits.NewGitCLI()
 	gitDir, err := initializeTempGitRepo(gitter)
-	defer func() {
-		err := os.RemoveAll(gitDir)
-		assert.NoError(t, err)
-	}()
 	assert.NoError(t, err)
 	dir, versionRef, err := versionstreamrepo.CloneJXVersionsRepo(
 		gitDir,
@@ -126,10 +117,6 @@ func TestCloneJXVersionsRepoWithATag(t *testing.T) {
 func TestCloneJXVersionsRepoWithABranch(t *testing.T) {
 	gitter := gits.NewGitCLI()
 	gitDir, err := initializeTempGitRepo(gitter)
-	defer func() {
-		err := os.RemoveAll(gitDir)
-		assert.NoError(t, err)
-	}()
 	assert.NoError(t, err)
 	dir, versionRef, err := versionstreamrepo.CloneJXVersionsRepo(
 		gitDir,
@@ -151,10 +138,6 @@ func TestCloneJXVersionsRepoWithABranch(t *testing.T) {
 func TestCloneJXVersionsRepoWithACommit(t *testing.T) {
 	gitter := gits.NewGitCLI()
 	gitDir, err := initializeTempGitRepo(gitter)
-	defer func() {
-		err := os.RemoveAll(gitDir)
-		assert.NoError(t, err)
-	}()
 	assert.NoError(t, err)
 	dir, versionRef, err := versionstreamrepo.CloneJXVersionsRepo(
 		gitDir,
