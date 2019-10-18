@@ -50,6 +50,7 @@ func TestCloneJXVersionsRepoWithABranch(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, dir)
 	assert.NotNil(t, versionRef)
+	assert.Equal(t, VersionRef, versionRef)
 }
 
 func TestCloneJXVersionsRepoWithACommit(t *testing.T) {
@@ -67,4 +68,5 @@ func TestCloneJXVersionsRepoWithACommit(t *testing.T) {
 	assert.NoError(t, err)
 	assert.NotNil(t, dir)
 	assert.NotNil(t, versionRef)
+	assert.Equal(t, VersionRef, versionRef)
 }
