@@ -399,6 +399,7 @@ func existingBootClone(pipelineFile string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
+	fmt.Println("*****  Config File Path: ", config.RequirementsConfigFileName)
 	requirementsExist, err := util.FileExists(config.RequirementsConfigFileName)
 	if err != nil {
 		return false, err

@@ -977,7 +977,7 @@ func (o *StepCreateTaskOptions) modifyEnvVars(container *corev1.Container, globa
 		if kube.GetSliceEnvVar(envVars, "JX_INTERPRET_PIPELINE") == nil {
 			envVars = append(envVars, corev1.EnvVar{
 				Name:  "JX_INTERPRET_PIPELINE",
-				Value: "true",
+				Value: "false",
 			})
 		}
 	} else {

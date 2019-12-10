@@ -172,7 +172,9 @@ func (g *GitlabProvider) GetRepository(org, name string) (*GitRepository, error)
 	if err != nil {
 		return nil, err
 	}
-	project, response, err := g.Client.Projects.GetProject(pid)
+	flag := true
+	gitLabProjOpts := &gitlab.GetProjectOptions{&flag, &flag, &flag}
+	project, response, err := g.Client.Projects.GetProject(pid, gitLabProjOpts)
 	if err != nil {
 		return nil, fmt.Errorf("request: %s failed due to: %s", response.Request.URL, err)
 	}
@@ -224,7 +226,8 @@ func (g *GitlabProvider) ForkRepository(originalOrg, name, destinationOrg string
 	if err != nil {
 		return nil, err
 	}
-	project, _, err := g.Client.Projects.ForkProject(pid)
+	forkOption := &gitlab.ForkProjectOptions{&originalOrg, &name, &destinationOrg}
+	project, _, err := g.Client.Projects.ForkProject(pid, forkOption)
 	if err != nil {
 		return nil, err
 	}
@@ -352,7 +355,9 @@ func (g *GitlabProvider) UpdatePullRequestStatus(pr *GitPullRequest) error {
 	if err != nil {
 		return err
 	}
-	mr, _, err := g.Client.MergeRequests.GetMergeRequest(pid, *pr.Number)
+	flag := true
+	mergeRequestOptions := &gitlab.GetMergeRequestsOptions{&flag, &flag, &flag}
+	mr, _, err := g.Client.MergeRequests.GetMergeRequest(pid, *pr.Number, mergeRequestOptions)
 	if err != nil {
 		return err
 	}
@@ -633,7 +638,7 @@ func (g *GitlabProvider) GetIssue(org, repo string, number int) (*GitIssue, erro
 }
 
 func (g *GitlabProvider) CreateIssue(owner string, repo string, issue *GitIssue) (*GitIssue, error) {
-	labels := []string{}
+	labels := gitlab.Labels{}
 	for _, label := range issue.Labels {
 		name := label.Name
 		if name != "" {
@@ -644,7 +649,7 @@ func (g *GitlabProvider) CreateIssue(owner string, repo string, issue *GitIssue)
 	opt := &gitlab.CreateIssueOptions{
 		Title:       &issue.Title,
 		Description: &issue.Body,
-		Labels:      labels,
+		Labels:      &labels,
 	}
 
 	pid, err := g.projectId(owner, g.Username, repo)

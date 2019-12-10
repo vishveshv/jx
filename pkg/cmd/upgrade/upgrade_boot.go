@@ -409,6 +409,8 @@ func (o *UpgradeBootOptions) raisePR() error {
 	}
 
 	upstreamInfo, err := provider.GetRepository(gitInfo.Organisation, gitInfo.Name)
+	fmt.Println("*** Debug from upgrade_boot ****")
+
 	if err != nil {
 		return errors.Wrapf(err, "getting repository %s/%s", gitInfo.Organisation, gitInfo.Name)
 	}
