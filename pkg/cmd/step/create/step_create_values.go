@@ -111,6 +111,7 @@ func NewCmdStepCreateValues(commonOpts *opts.CommonOptions) *cobra.Command {
 
 // Run implements this command
 func (o *StepCreateValuesOptions) Run() error {
+	fmt.Println("**** I am inside create value step")
 	ns, err := o.GetDeployNamespace(o.Namespace)
 	if err != nil {
 		return err

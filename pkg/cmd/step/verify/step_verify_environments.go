@@ -147,7 +147,7 @@ func (o *StepVerifyEnvironmentsOptions) isJXBoot() bool {
 	// sort of a hack to determine that `jx boot` is executed opposed to running as a pipeline build
 	// see step_create_task where JX_INTERPRET_PIPELINE is set when the pipeline is executed in interpret mode
 	// which in turn is set by `jx boot` (HF)
-	return os.Getenv(jxInterpretPipelineEnvKey) == "true"
+	return os.Getenv(jxInterpretPipelineEnvKey) == "false"
 }
 
 // readEnvironment returns the repository URL as well as the git ref for original boot config repo.
