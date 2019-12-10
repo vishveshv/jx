@@ -62,9 +62,9 @@ var (
 		jx create cluster gke --skip-installation
 
 		# now lets boot up Jenkins X installing/upgrading whatever is needed
-		jx boot 
+		jx boot
 
-		# if we have already booted and just want to apply some environment changes without 
+		# if we have already booted and just want to apply some environment changes without
         # re-applying ingress and so forth we can start at the environment step:
 		jx boot --start-step install-env
 `)
@@ -399,7 +399,6 @@ func existingBootClone(pipelineFile string) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	fmt.Println("*****  Config File Path: ", config.RequirementsConfigFileName)
 	requirementsExist, err := util.FileExists(config.RequirementsConfigFileName)
 	if err != nil {
 		return false, err

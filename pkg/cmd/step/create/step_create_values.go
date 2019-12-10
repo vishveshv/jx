@@ -48,9 +48,9 @@ var (
 		# create the values.yaml file from values.schema.json in the /path/to/values directory
 		jx step create values -d /path/to/values
 
-		# create the cheese.yaml file from cheese.schema.json in the current directory 
+		# create the cheese.yaml file from cheese.schema.json in the current directory
 		jx step create values --name cheese
-	
+
 			`)
 )
 
@@ -111,7 +111,6 @@ func NewCmdStepCreateValues(commonOpts *opts.CommonOptions) *cobra.Command {
 
 // Run implements this command
 func (o *StepCreateValuesOptions) Run() error {
-	fmt.Println("**** I am inside create value step")
 	ns, err := o.GetDeployNamespace(o.Namespace)
 	if err != nil {
 		return err
